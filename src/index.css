@@ -1,0 +1,111 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ---------- Theme tokens (RGB channels so Tailwind opacity utilities work) ---------- */
+:root {
+  --page: 255 255 255; /* White */
+  --light: 255 244 250; /* Light Pink  #FFF4FA */
+  --soft: 252 228 241; /* Soft Pink   #FCE4F1 */
+  --contact: 248 200 224;
+  --surface: 255 255 255;
+  --ink: 45 36 48; /* Dark Text   #2D2430 */
+  --muted: 128 111 123; /* Muted Text  #806F7B */
+  --accent: 201 53 132; /* readable pink for text on light backgrounds */
+  --shadow: 216 63 145;
+}
+
+.dark {
+  --page: 25 18 24;
+  --light: 33 24 32;
+  --soft: 43 31 41;
+  --contact: 62 36 57;
+  --surface: 42 31 40;
+  --ink: 249 236 245;
+  --muted: 196 175 189;
+  --accent: 244 139 195;
+  --shadow: 0 0 0;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    overflow-x: clip;
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    @apply bg-page font-body text-ink antialiased;
+    overflow-x: clip;
+    min-width: 320px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  h1, h2, h3, h4 {
+    @apply font-heading;
+  }
+  img {
+    @apply max-w-full;
+  }
+  :focus-visible {
+    outline: 3px solid #d83f91;
+    outline-offset: 3px;
+  }
+  .dark :focus-visible {
+    outline-color: #f48bc3;
+  }
+  ::selection {
+    background: #f48bc3;
+    color: #2d2430;
+  }
+}
+
+@layer components {
+  .container-x {
+    @apply mx-auto w-full max-w-6xl px-5 sm:px-8;
+  }
+
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-base font-semibold
+           transition duration-200 ease-out hover:-translate-y-0.5 hover:scale-[1.03] active:scale-100;
+  }
+  .btn-primary {
+    @apply btn bg-brand-deep text-white shadow-soft hover:shadow-lift;
+  }
+  .btn-ghost {
+    @apply btn border-2 border-brand-deep/60 bg-surface/70 text-ink hover:border-brand-deep hover:bg-surface;
+  }
+
+  .card {
+    @apply rounded-card border border-brand/25 bg-surface shadow-soft transition duration-300;
+  }
+  .card-hover {
+    @apply hover:-translate-y-[5px] hover:border-brand hover:shadow-lift;
+  }
+
+  /* Underline that grows in from the left */
+  .link-underline {
+    @apply relative;
+  }
+  .link-underline::after {
+    content: "";
+    @apply absolute -bottom-1 left-0 h-0.5 w-full origin-left scale-x-0 rounded-full bg-brand-dark
+           transition-transform duration-300 ease-out;
+  }
+  .link-underline:hover::after,
+  .link-underline[aria-current="true"]::after {
+    @apply scale-x-100;
+  }
+}
+
+/* ---------- Reduced motion: stop decorative loops and smooth scrolling ---------- */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

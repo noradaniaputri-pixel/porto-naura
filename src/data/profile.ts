@@ -11,11 +11,7 @@ export const profile = {
     "I design and build responsive web apps from the interface to the database, with a soft spot for clean code and friendly UI.",
 
   // Put your photo in /public (e.g. /noura.webp) and set the path here. Empty = placeholder portrait.
-<<<<<<< HEAD
-  photo: "../src/assets/WhatsApp Image 2026-10-02 at 12.39.20.jpeg",
-=======
-  photo: "/src/assets/pp.jpeg",
->>>>>>> 0530afc (update)
+  photo: "/pp.jpeg",
   aboutPhoto: "",
 
   location: "Indonesia",
